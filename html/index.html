@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>UFPR CampusMap</title>
+    <!-- habilitando o dimensionamento responsivo -->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+
+    <!-- Numero institucional UFPR 428-->
+    <meta property="creator.productor" content="http://estruturaorganizacional.dados.gov.br/id/unidade-organizacional/428">
+
+    <!--==========================
+      CSS
+    ============================-->
+
+    <!-- Bootstrap v4.3.1-->
+    <link href="../src/assets/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Leaflet 1.5.1-->
+    <link href="../src/assets/leaflet-1.5.1/leaflet.css" rel="stylesheet" />
+    <!-- Plugins Leaflet -->
+    <!-- fullscreen -->
+    <link href='../src/plugins/leaflet.fullscreen.css' rel='stylesheet' />
+    <!-- Controle de Basemaps-->
+    <link rel="stylesheet" href="../src/plugins/L.Control.Basemaps.css" />
+
+    <style>
+        html,
+        body {
+            overflow: hidden;
+            height: 100vh;
+            width: 100%;
+        }
+        
+        #map {
+            height: 100%;
+            width: auto;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        #sidebar-wrapper {
+            min-height: calc(100vh - 100px);
+            margin-left: -15rem;
+            position: relative;
+            -webkit-transition: margin .25s ease-out;
+            -moz-transition: margin .25s ease-out;
+            -o-transition: margin .25s ease-out;
+            transition: margin .25s ease-out;
+        }
+        
+        #sidebar-wrapper .sidebar-heading {
+            padding: 0.875rem 1.25rem;
+            font-size: 1.2rem;
+        }
+        
+        #sidebar-wrapper .list-group {
+            width: 15rem;
+        }
+        
+        #page-content-wrapper {
+            min-width: 0;
+            width: 100vw;
+        }
+        
+        #wrapper.toggled #sidebar-wrapper {
+            margin-left: 0;
+        }
+        
+        .navbar-collapse.in {
+            overflow-y: auto;
+        }
+        
+        @media (min-width: 768px) {
+            #sidebar-wrapper {
+                margin-left: 0;
+            }
+            #page-content-wrapper {
+                min-width: 0;
+                width: 100%;
+            }
+            #wrapper.toggled #sidebar-wrapper {
+                margin-left: -15rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!--==========================
+      Barra Institucional
+    ============================-->
+    <section id="topbar">
+        <div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;">
+            <ul id="menu-barra-temp" style="list-style:none;">
+                <li style="display:inline; float:left; padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED">
+                    <a href="http://brasil.gov.br" style="font-family:sans,sans-serif; text-decoration:none; color:white;">Portal do Governo Brasileiro</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu1</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+        <div class="navbar-collapse collapse in" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                      </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Start Bootstrap </div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+                <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
+                <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
+                <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
+                <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+                <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <!-- div do mapa do Leaflet -->
+            <div id="map"></div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
+
+
+    <!-- Rodape -->
+    <section id="footer">
+
+    </section>
+
+    <!--==========================
+      JS
+    ============================-->
+
+    <!-- Dependencias Bootstrap -->
+    <!-- Jquery v3.4.1 -->
+    <script src="../src/assets/jquery-3.4.1.min.js"></script>
+    <!-- Popper v1-->
+    <script src="../src/assets/popper.min.js"></script>
+    <!-- Bootstrap v4.3.1-->
+    <script src="../src/assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <!-- Barra Institucional -->
+    <!-- script defer="defer" src="../src/assets/barra.brasil.gov.br/barra_2.0.js" type="text/javascript"></script -->
+    <script defer="defer" src="https://barra.brasil.gov.br/barra_2.0.js" type="text/javascript"></script>
+
+    <!-- Leaflet -->
+    <script src="../src/assets/leaflet-1.5.1/leaflet.js"></script>
+    <!-- Plugins Leaflet -->
+    <!-- Proj4 -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.3/proj4.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/proj4leaflet/1.0.1/proj4leaflet.min.js'></script>
+
+    <!-- fullscreen -->
+    <script src='../src/plugins/leaflet.fullscreen.min.js'></script>
+    <!-- hash (zoom e posição no endereco) -->
+    <script src='../src/plugins/leaflet-hash.js'></script>
+    <!-- Controle de Basemaps -->
+    <script src="../src/plugins/L.Control.Basemaps.js"></script>
+
+    <!-- Arquivos JS -->
+    <!-- Criação do mapa principal -->
+    <script src='../src/js/leaflet_mymap.js'></script>
+    <!-- Chamada dos layers WMS -->
+    <script src='../src/js/'></script>
+    <!-- Identificação dos layers e aributos que serão exibidos no popup -->
+    <script src='../src/js/'></script>
+    <!-- Criação do popup e feição geojson dinâmica -->
+    <script src='../src/js/leaflet.getgeojson.js'></script>
+
+
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+            setTimeout(function() {
+                map.invalidateSize()
+            }, 400);
+        });
+    </script>
+
+    <!-- Permitir selecionar o WMS -->
+    <script>
+        //wms
+        var urlWms = 'http://200.17.225.167:9888/geoserver/UCM-BASE/wms?';
+
+
+        var edificacao = L.tileLayer.getGeojson(urlWms, {
+            layers: 'UCM-BASE:ccja_edificacao',
+            transparent: 'true',
+            format: 'image/png8',
+            maxZoom: 23,
+        });
+        var calcada = L.tileLayer.wms(urlWms, {
+            layers: 'UCM-BASE:ccja_calcada',
+            transparent: 'true',
+            format: 'image/png8',
+            maxZoom: 23,
+        });
+        var trechoRua = L.tileLayer.wms(urlWms, {
+            layers: 'UCM-BASE:ccja_trecho_arruamento',
+            transparent: 'true',
+            format: 'image/png8',
+            maxZoom: 23,
+        });
+
+
+
+        basemap = [];
+        overlays = {
+            "Edificação": edificacao,
+            "Calçada": calcada,
+            "Arruamento": trechoRua
+
+        };
+        L.control.layers(basemap, overlays).addTo(map);
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Codigo obtido em: https://codepen.io/mmsmdali/pen/LWEpym/
+        url = "http://200.17.225.167:9888/geoserver/UCM-BASE/wms",
+            services = {
+                //layer1_name:{title:"layer1_title",properties:{property1_name:"property1_title",property2_name:"property2_title"}}
+                ccja_edificacao: {
+                    title: "Edificação",
+                    properties: {
+                        setor: "Setor",
+                        edificacao: "Edificação"
+                    }
+                }
+                /*,
+                               ccja_calcada: {
+                                   title: "Calçada",
+                                   properties: {
+                                       codLocal: "Código",
+                                       area: "Área"
+                                   }
+                               } */
+            };
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    </script>
+
+
+    <script>
+        var ortofoto5cm = L.tileLayer.wms(urlWms, {
+            layers: 'UCM-BASE:UFPR_CPJA_5cm',
+            format: 'image/png',
+            transparent: 'true',
+            maxZoom: 23,
+            minZoom: 20,
+        });
+        map.on("baselayerchange",
+            function(e) {
+                // e.name has the layer name
+                // e.layer has the layer reference
+                //map.activeBaseLayer = e.layer;
+                //console.log("base map changed to " + e.name);
+                console.log("base map changed to " + this.map);
+                //if
+            });
+    </script>
+
+</body>
+
+</html>

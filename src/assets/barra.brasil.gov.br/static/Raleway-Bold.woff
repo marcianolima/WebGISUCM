@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<meta content="GitLab Community Edition" name="description" />
+<title>
+govbr / barra.govbr | 
+GitLab
+</title>
+
+<link href="/gitlab/assets/application-34688c1fd3feba89dd15e52b0e2916fc.css" media="all" rel="stylesheet" />
+<link href="/gitlab/assets/print-05b72ab1cf0c8441d4dca5bf6e17d26f.css" media="print" rel="stylesheet" />
+<script src="/gitlab/assets/application-09e7fa8a42bc1c6bcc00363de0e32fa2.js"></script>
+<meta content="authenticity_token" name="csrf-param" />
+<meta content="QfjtC7FNaS/QJvm9QW+08CJ7ZyuuQZm6SfNJ6/C+58E=" name="csrf-token" />
+<script type="text/javascript">
+//<![CDATA[
+window.gon={};gon.default_issues_tracker="gitlab";gon.api_version="v3";gon.relative_url_root="/gitlab";gon.default_avatar_url="http://softwarepublico.gov.br/gitlab/assets/no_avatar-36265b16c683d511a0d005b916939aa0.png";
+//]]>
+</script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+
+
+  
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    
+      
+    
+
+    <title>Colab - Colab </title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/fav.7fd2546e2ad8.ico" />
+
+    <link rel="stylesheet" href="/static/third-party/bootstrap/css/bootstrap.min.4eadbf7d1721.css" type="text/css" media="screen, projection" />
+
+    <link rel="stylesheet" href="/static/third-party/font-awesome/css/font-awesome.min.7fbe76cdac60.css" type="text/css" media="screen" />
+
+    
+
+    
+        <!-- JQuery 2+ won't work for IE < 9 -->
+        <script type="text/javascript" src="/static/third-party/jquery-2.0.3.min.0a6e846b954e.js"></script>
+    
+    
+        <script type="text/javascript" src="/static/third-party/bootstrap/js/bootstrap.min.9e25e8e29ef0.js"></script>
+    
+    <script type="text/javascript" src="/static/third-party/jquery.debouncedresize.d3f7af0d241d.js"></script>
+    <script type="text/javascript" src="/static/third-party/jquery.cookie.86bfb3ae149e.js"></script>
+
+
+    
+
+<!-- Google Analytics Tracking Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64206731-1', 'auto');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+    
+<script type="text/javascript">
+  jQuery(function(){
+    // bootstrap.css forces .hide {display:none!important}, and this makes
+    // gitlab .hide elements NEVER have a display:block, so
+    // instead of editing bootstrap.css, we just removed '.hide' css class and
+    // toggled 
+    jQuery('.hide').each(function(){
+      display_status = this.style.display;
+      jQuery(this).removeClass('hide');
+      if(display_status != 'block')
+        this.style.display = 'none';
+    })
+
+    // Hit the SSH clone button to select it by default
+    jQuery(".git-clone-holder .btn:contains('SSH')").click()
+
+  });
+</script>
+<script type="text/javascript" src="/static/third-party/bootstrap/js/bootstrap.min.9e25e8e29ef0.js"></script>
+<script type="text/javascript" src="/static/third-party/jquery.cookie.86bfb3ae149e.js"></script>
+<script>jQuery.noConflict();</script>
+
+    
+<style>
+  /* Reset left and with for .modal-dialog style (like gitlab does), 
+     the bootstrap.css one makes it small */
+  @media screen and (min-width: 768px) {
+    .modal-dialog {
+      left: auto;
+      width: auto;
+    }
+  }
+  div#main-content {
+    margin-top: 65px;
+  }
+
+  div#main-content div.container {
+    width: 1110px;
+  }
+  div#main-content div.flash-container{
+    width: 85%;
+  }
+  #breadcrumbs {
+    border: 0 !important;
+  }
+
+  #right-top-nav {
+    margin-right: 5em !important;
+  }
+</style>
+
+
+    <link rel="stylesheet" href="/static/css/screen.2a4e8b642e1e.css" type="text/css" media="screen" />
+
+    <link rel="stylesheet" href="/static/css/header.bdfd9f9ae34e.css" type="text/css" media="screen" />
+
+    <link rel="stylesheet" href="/static/css/footer.572cf7a25398.css" type="text/css" media="screen" />
+  
+  </head>
+
+  <!-- data-no-turbolink will disable Rails TurboLinks for all pages under Colab -->
+  <body data-no-turbolink="" class="ui_mars application" data-page="projects:blob:show" data-project-id=""><link rel="stylesheet" href="/static/css/header-slim.3c2459ce0eab.css" /><header class="header-slim">
+  <div class="colab-style">
+    <div id="barra-brasil">
+      <a href="http://brasil.gov.br" style="background:#7F7F7F; height: 20px; padding:4px 0 4px 10px; display: block; font-family:sans,sans-serif; text-decoration:none; color:white; ">Software Público Brasileiro</a>
+    </div>
+    <script src="//barra.brasil.gov.br/barra.js" type="text/javascript" defer="defer" async=""></script>
+    <div id="header" role="banner">
+      <div id="logo">
+          <!--
+        <div id="back-to-software" class="pull-left">
+            <span id="back-arrow"><a href="https://softwarepublico.gov.br/gitlab/govbr/barra-govbr/tree/master/app/static">&larr;</a></span>
+        </div>
+          -->
+        <div id="logo-holder" class="pull-left">
+          <a id="portal-logo" title="" href="/">
+            <span id="portal-title-1">Portal do</span>
+            <h1 id="portal-title" class="corto">Software Público Brasileiro</h1>
+          </a>
+        </div>
+      </div>
+      <div id="spb-header-content">
+        <ul id="login-menu">
+          
+          <li class="login-item"><a href="/account/register">Cadastre-se</a></li>
+          <li class="login-item last-item"><a href="/account/login">Entrar</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</header><a name="acontent" id="acontent"></a><div id="alert-js" class="alert alert-dismissable alert-warning" hidden="">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <span id="alert-message"></span>
+            </div><div id="main-content" class="container">
+
+
+
+<nav class="main-nav navbar-collapse collapse">
+<div class="container"><ul class="project-navigation">
+<li class="home"><a class="shortcuts-project" href="/gitlab/govbr/barra-govbr" title="Project">Project
+</a></li><li class="active"><a class="shortcuts-tree" href="/gitlab/govbr/barra-govbr/tree/master">Files</a>
+</li><li class=""><a class="shortcuts-commits" href="/gitlab/govbr/barra-govbr/commits/master">Commits</a>
+</li><li class=""><a class="shortcuts-network" href="/gitlab/govbr/barra-govbr/network/master">Network</a>
+</li><li class=""><a class="shortcuts-graphs" href="/gitlab/govbr/barra-govbr/graphs/master">Graphs</a>
+</li><li class=""><a class="shortcuts-issues" href="/gitlab/govbr/barra-govbr/issues">Issues
+<span class="count issue_counter">7</span>
+</a></li><li class=""><a class="shortcuts-merge_requests" href="/gitlab/govbr/barra-govbr/merge_requests">Merge Requests
+<span class="count merge_counter">0</span>
+</a></li><li class=""><a class="shortcuts-wiki" href="/gitlab/govbr/barra-govbr/wikis/home">Wiki</a>
+</li></ul>
+</div>
+</nav>
+<div class="container">
+<div class="content"><div class="tree-ref-holder">
+<form accept-charset="UTF-8" action="/gitlab/govbr/barra-govbr/refs/switch" class="project-refs-form" method="get"><div style="display:none"><input name="utf8" type="hidden" value="✓" /></div>
+<select class="project-refs-select select2 select2-sm" id="ref" name="ref"><optgroup label="Branches"><option selected="selected" value="master">master</option></optgroup><optgroup label="Tags"><option value="v201309">v201309</option>
+<option value="3.0.11">3.0.11</option>
+<option value="3.0.10">3.0.10</option>
+<option value="3.0.9">3.0.9</option>
+<option value="3.0.8">3.0.8</option>
+<option value="3.0.7">3.0.7</option>
+<option value="3.0.6">3.0.6</option>
+<option value="3.0.5.1">3.0.5.1</option>
+<option value="3.0.5">3.0.5</option>
+<option value="3.0.4">3.0.4</option>
+<option value="3.0.3">3.0.3</option>
+<option value="3.0.1">3.0.1</option>
+<option value="2.2.20">2.2.20</option>
+<option value="2.2.17">2.2.17</option>
+<option value="2.2.15">2.2.15</option>
+<option value="2.2.14">2.2.14</option>
+<option value="2.2.13">2.2.13</option>
+<option value="2.2.12">2.2.12</option>
+<option value="2.2.11">2.2.11</option>
+<option value="2.2.10">2.2.10</option>
+<option value="2.2.9">2.2.9</option>
+<option value="2.2.8">2.2.8</option>
+<option value="2.2.7">2.2.7</option>
+<option value="2.2.6">2.2.6</option>
+<option value="2.2.5">2.2.5</option>
+<option value="2.2.4">2.2.4</option>
+<option value="2.2.3">2.2.3</option>
+<option value="2.2.2">2.2.2</option>
+<option value="2.2.1">2.2.1</option>
+<option value="2.2.0">2.2.0</option>
+<option value="2.1.21">2.1.21</option>
+<option value="2.1.20">2.1.20</option>
+<option value="2.1.19">2.1.19</option>
+<option value="2.1.18">2.1.18</option>
+<option value="2.1.17">2.1.17</option>
+<option value="2.1.16">2.1.16</option>
+<option value="2.1.15">2.1.15</option>
+<option value="2.1.14">2.1.14</option>
+<option value="2.1.13">2.1.13</option>
+<option value="2.1.12">2.1.12</option>
+<option value="2.1.11">2.1.11</option>
+<option value="2.1.10">2.1.10</option>
+<option value="2.1.9">2.1.9</option>
+<option value="2.1.8">2.1.8</option>
+<option value="2.1.7">2.1.7</option>
+<option value="2.1.6">2.1.6</option>
+<option value="2.1.5">2.1.5</option>
+<option value="2.1.4">2.1.4</option>
+<option value="2.1.3">2.1.3</option>
+<option value="2.1.2">2.1.2</option>
+<option value="2.1.1">2.1.1</option>
+<option value="2.1.0">2.1.0</option>
+<option value="2.0.3">2.0.3</option>
+<option value="2.0.2">2.0.2</option>
+<option value="2.0.1">2.0.1</option>
+<option value="2.0">2.0</option>
+<option value="1.9">1.9</option>
+<option value="1.8">1.8</option>
+<option value="1.7">1.7</option>
+<option value="1.6">1.6</option>
+<option value="1.5">1.5</option>
+<option value="1.4">1.4</option>
+<option value="1.3">1.3</option>
+<option value="1.2">1.2</option>
+<option value="1.1">1.1</option>
+<option value="1.0">1.0</option></optgroup></select>
+<input id="destination" name="destination" type="hidden" value="blob" />
+<input id="path" name="path" type="hidden" value="app/static/Raleway-Bold.woff" />
+</form>
+
+
+</div>
+<div class="tree-holder" id="tree-holder">
+<ul class="breadcrumb repo-breadcrumb">
+<li>
+<i class="fa fa-angle-right"></i>
+<a href="/gitlab/govbr/barra-govbr/tree/master">barra-govbr
+</a></li>
+<li>
+<a href="/gitlab/govbr/barra-govbr/tree/master/app">app</a>
+</li>
+<li>
+<a href="/gitlab/govbr/barra-govbr/tree/master/app/static">static</a>
+</li>
+<li>
+<a href="/gitlab/govbr/barra-govbr/blob/master/app/static/Raleway-Bold.woff"><strong>
+Raleway-Bold.woff
+</strong>
+</a></li>
+</ul>
+<ul class="blob-commit-info bs-callout bs-callout-info hidden-xs">
+<li class="commit js-toggle-container">
+<div class="commit-row-title">
+<a class="commit_short_id" href="/gitlab/govbr/barra-govbr/commit/9151d829a34bc36770397290ce857a6b3a747374">9151d829</a>
+ 
+<span class="str-truncated">
+<a class="commit-row-message" href="/gitlab/govbr/barra-govbr/commit/9151d829a34bc36770397290ce857a6b3a747374">Remove woff2 e adiciona woff</a>
+</span>
+<a class="pull-right" href="/gitlab/govbr/barra-govbr/tree/9151d829a34bc36770397290ce857a6b3a747374">Browse Code »</a>
+<div class="notes_count">
+</div>
+</div>
+<div class="commit-row-info">
+<a class="commit-author-link has_tooltip" data-original-title="edu.carlos.vieira@gmail.com" href="/gitlab/u/caduvieira"><img alt="" class="avatar s16" src="http://cdn.libravatar.org/avatar/232099a207750ff42e92bcd1517e0df9?s=16&amp;d=identicon" width="16" /> <span class="commit-author-name">Carlos Vieira</span></a>
+<div class="committed_ago">
+<time class="time_ago" data-placement="top" data-toggle="tooltip" datetime="2018-05-23T13:54:15Z" title="May 23, 2018 10:54am">2018-05-23 10:54:15 -0300</time>
+<script>$('.time_ago').timeago().tooltip()</script>
+  
+</div>
+</div>
+</li>
+
+</ul>
+<div class="tree-content-holder" id="tree-content-holder">
+<article class="file-holder">
+<div class="file-title clearfix">
+<i class="fa fa-file"></i>
+<span class="file_name">
+Raleway-Bold.woff
+<small>24.6 KB</small>
+</span>
+<span class="options hidden-xs"><div class="btn-group tree-btn-group">
+<a class="btn btn-small" href="/gitlab/govbr/barra-govbr/raw/master/app/static/Raleway-Bold.woff" target="_blank">Raw</a>
+<a class="btn btn-small" href="/gitlab/govbr/barra-govbr/commits/master/app/static/Raleway-Bold.woff">History</a>
+<a class="btn btn-small" href="/gitlab/govbr/barra-govbr/blob/6c0eb3037bfb8a916b3856e0c03de92612bea5bd/app/static/Raleway-Bold.woff">Permalink</a>
+</div>
+</span>
+</div>
+<div class="file-content blob_file blob-no-preview">
+<div class="center">
+<a href="/gitlab/govbr/barra-govbr/raw/master/app/static/Raleway-Bold.woff"><h1 class="light">
+<i class="fa fa-download"></i>
+</h1>
+<h4>
+Download (24.6 KB)
+</h4>
+</a></div>
+</div>
+
+</article>
+</div>
+
+</div>
+</div>
+</div>
+
+      
+    </div><footer>
+  <div id="btn-top" class="container">
+    <div class="pull-right go-top">
+      <a id="link-top" href="#link-rodape">Voltar para o topo</a>
+    </div>
+  </div>
+  <div id="footer" role="contentinfo">
+    <a name="afooter" id="afooter"></a>
+    <div id="doormat-container" class="columns-4">
+      <div class="doormatColumn column-0">
+        <dl class="doormatSection">
+          <dt class="doormatSectionHeader">Assuntos</dt>
+          <dd class="doormatSectionBody">
+            <a href="/social/spb/publique-seu-software" class="external-link">Publique seu software</a>
+          </dd>
+          <dd class="doormatSectionBody">
+            <a href="http://antigo.softwarepublico.gov.br/mpv/" class="external-link">Prestadores de serviço</a>
+          </dd>
+          <dd class="doormatSectionBody">
+            <a href="http://antigo.softwarepublico.gov.br/4cmbr/xowiki/Principal" class="external-link">Espaços dos municípios</a>
+          </dd>
+        </dl>
+      </div>
+      <div class="doormatColumn column-1">
+        <dl class="doormatSection">
+          <dt class="doormatSectionHeader">Software Público</dt>
+          <dd class="doormatSectionBody">
+            <a href="/social/spb/entenda-o-que-e" class="external-link">Entenda o que é</a>
+          </dd>
+          <dd class="doormatSectionBody">
+            <a href="/social/profile/spb/events" class="external-link">Eventos</a>
+          </dd>
+          <dd class="doormatSectionBody">
+            <a href="/social/spb/premios" class="external-link">Prêmios</a>
+          </dd>
+          <dd class="doormatSectionBody">
+            <a href="/social/spb/publicacoes" class="external-link">Publicações</a>
+          </dd>
+        </dl>
+      </div>
+      <div class="doormatColumn column-2">
+        <dl class="doormatSection">
+          <dt class="doormatSectionHeader">Serviços</dt>
+          <dd class="doormatSectionBody">
+            <a href="/social/spb/ajuda#faq" class="external-link">FAQ</a>
+          </dd>
+          <dd class="doormatSectionBody">
+            <a href="/social/spb/contato" class="external-link">Contato</a>
+          </dd>
+          <dd class="doormatSectionBody">
+            <a href="/archives/thread/spb-usuarios/relatar-erros#msg-1635" class="external-link">Relatar erros</a>
+          </dd>
+        </dl>
+      </div>
+      <div class="doormatColumn column-3">
+        <dl class="doormatSection">
+          <dt class="doormatSectionHeader">RSS</dt>
+          <dd class="doormatSectionBody">
+            <a href="/social/spb/rss/o-que-e" class="external-link">O que é?</a>    
+          </dd>
+          <dd class="doormatSectionBody">
+            <a href="/rss/colab/latest" class="external-link">Assine</a>
+          </dd>
+        </dl>
+        <dl class="doormatSection">
+          <dt class="doormatSectionHeader">Navegação</dt>
+          <dd class="doormatSectionBody">
+            <a href="/social/spb/acessibilidade" class="external-link">Acessibilidade</a>  
+          </dd>
+          <dd class="doormatSectionBody">
+            <a href="/social/spb/mapa-do-site" class="external-link">Mapa do site</a>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="clear"></div>
+ <div class="footer-logos">
+
+
+      <div>
+
+          <a href="http://www.acessoainformacao.gov.br/">
+              <span class="logo-acesso-footer"></span>
+          </a>
+
+
+          <a href="http://www.brasil.gov.br/">
+              <span class="lglogo"></span>
+          </a>
+
+
+      </div>
+
+  </div>
+  </div>
+  <div id="extra-footer">
+    <p>
+      Desenvolvido com os projetos de software livre
+      <a href="http://github.com/colab/colab">Colab</a>,
+      <a href="http://gitlab.com">Gitlab</a>,
+      <a href="http://www.gnu.org/software/mailman/">Mailman</a> e
+      <a href="http://noosfero.org">Noosfero</a>
+    </p>
+  </div>
+</footer><script type="text/javascript">
+  var date = new Date();
+  jQuery.cookie('utc_offset', date.getTimezoneOffset(), { path: '/' });
+</script></body>
+</html>
