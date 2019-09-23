@@ -32,12 +32,14 @@
     <link rel="stylesheet" href="../src/plugins/L.Control.Basemaps.css" />
 
     <style>
+        /*
         html,
         body {
-            overflow: hidden;
+            overflow-x: hidden;
             height: 100vh;
             width: 100%;
         }
+        */
         
         #map {
             height: 100%;
@@ -72,10 +74,6 @@
         
         #wrapper.toggled #sidebar-wrapper {
             margin-left: 0;
-        }
-        
-        .navbar-collapse.in {
-            overflow-y: auto;
         }
         
         @media (min-width: 768px) {
@@ -165,14 +163,8 @@
     </div>
     <!-- /#wrapper -->
 
-
-
-
-
-
     <!-- Rodape -->
     <section id="footer">
-
     </section>
 
     <!--==========================
@@ -195,7 +187,7 @@
     <script src="../src/assets/leaflet-1.5.1/leaflet.js"></script>
 
     <!-- Plugins Leaflet -->
-    <!-- Proj4 -->
+    <!-- Proj4 tranforma o sistema de coordenadas-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.3/proj4.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/proj4leaflet/1.0.1/proj4leaflet.min.js'></script>
 
@@ -203,109 +195,42 @@
     <script src='../src/plugins/leaflet.fullscreen.min.js'></script>
     <!-- hash (zoom e posição no endereco) -->
     <script src='../src/plugins/leaflet-hash.js'></script>
-    <!-- Controle de Basemaps -->
+    <!-- Controle de Basemaps de forma grafica-->
     <script src="../src/plugins/L.Control.Basemaps.js"></script>
 
     <!-- Arquivos JS -->
     <!-- Criação do mapa principal -->
     <script src='../src/js/leaflet_mymap.js'></script>
     <!-- Chamada dos layers WMS -->
-    <script src='../src/js/'></script>
+    <script src='../src/js/leaflet_mywms.js'></script>
     <!-- Identificação dos layers e aributos que serão exibidos no popup -->
-    <script src='../src/js/'></script>
+    <!-- script src='../src/js/'></script -->
     <!-- Criação do popup e feição geojson dinâmica -->
-    <script src='../src/js/leaflet.getgeojson.js'></script>
+    <!-- script src='../src/js/leaflet.getgeojson.js'></script -->
 
 
     <!-- Menu Toggle Script -->
     <script>
+        //chama a janela toggle ao clique do botao no nabar
         $("#menu-toggle").click(function(e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
+            // corrige a janela do mapa
             setTimeout(function() {
                 map.invalidateSize()
-            }, 400);
+            }, 100);
         });
     </script>
 
-    <!-- Permitir selecionar o WMS -->
     <script>
-        //wms
-        var urlWms = 'http://200.17.225.167:9888/geoserver/UCM-BASE/wms?';
-
-
-        var edificacao = L.tileLayer.getGeojson(urlWms, {
-            layers: 'UCM-BASE:ccja_edificacao',
-            transparent: 'true',
-            format: 'image/png8',
-            maxZoom: 23,
-        });
-        var calcada = L.tileLayer.wms(urlWms, {
-            layers: 'UCM-BASE:ccja_calcada',
-            transparent: 'true',
-            format: 'image/png8',
-            maxZoom: 23,
-        });
-        var trechoRua = L.tileLayer.wms(urlWms, {
-            layers: 'UCM-BASE:ccja_trecho_arruamento',
-            transparent: 'true',
-            format: 'image/png8',
-            maxZoom: 23,
-        });
-
-
-
-        basemap = [];
-        overlays = {
-            "Edificação": edificacao,
-            "Calçada": calcada,
-            "Arruamento": trechoRua
-
-        };
-        L.control.layers(basemap, overlays).addTo(map);
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // Codigo obtido em: https://codepen.io/mmsmdali/pen/LWEpym/
-        url = "http://200.17.225.167:9888/geoserver/UCM-BASE/wms",
-            services = {
-                //layer1_name:{title:"layer1_title",properties:{property1_name:"property1_title",property2_name:"property2_title"}}
-                ccja_edificacao: {
-                    title: "Edificação",
-                    properties: {
-                        setor: "Setor",
-                        edificacao: "Edificação"
-                    }
-                }
-                /*,
-                               ccja_calcada: {
-                                   title: "Calçada",
-                                   properties: {
-                                       codLocal: "Código",
-                                       area: "Área"
-                                   }
-                               } */
-            };
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    </script>
-
-
-    <script>
-        var ortofoto5cm = L.tileLayer.wms(urlWms, {
-            layers: 'UCM-BASE:UFPR_CPJA_5cm',
-            format: 'image/png',
-            transparent: 'true',
-            maxZoom: 23,
-            minZoom: 20,
-        });
         map.on("baselayerchange",
             function(e) {
                 // e.name has the layer name
                 // e.layer has the layer reference
                 //map.activeBaseLayer = e.layer;
                 //console.log("base map changed to " + e.name);
-                console.log("base map changed to " + this.map);
-                //if
+                //console.log("base map changed to " + imgNode.title);
+                //alert(this.options.Basemaps.imgNode.title);
             });
     </script>
 

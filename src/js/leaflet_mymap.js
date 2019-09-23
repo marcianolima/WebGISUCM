@@ -8,7 +8,7 @@ var basemaps = [
         id: 'mapbox.light',
         attributionControl: true,
         accessToken: 'pk.eyJ1IjoibWFyY2lhbm9kYWNvc3RhbGltYSIsImEiOiJjamV5eGsxZ3IwNGFrMndxb216dWwwenB1In0.maLUDU8v7Xi5PAOkjzPwMg',
-        label: "Light"
+        label: 'Light'
     }),
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -16,7 +16,7 @@ var basemaps = [
         id: 'mapbox.satellite',
         attributionControl: true,
         accessToken: 'pk.eyJ1IjoibWFyY2lhbm9kYWNvc3RhbGltYSIsImEiOiJjamV5eGsxZ3IwNGFrMndxb216dWwwenB1In0.maLUDU8v7Xi5PAOkjzPwMg',
-        label: "Satelite"
+        label: 'Satelite'
     }),
 
 ]

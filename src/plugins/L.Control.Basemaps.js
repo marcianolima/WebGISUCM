@@ -30,14 +30,14 @@ L.Control.Basemaps = L.Control.extend({
                 basemapClass += " alt";
             }
             var url;
+
             if (d.options.iconURL) {
                 url = d.options.iconURL;
             } else {
                 var coords = { x: this.options.tileX, y: this.options.tileY };
                 url = L.Util.template(
                     d._url,
-                    L.extend(
-                        {
+                    L.extend({
                             s: d._getSubdomain(coords),
                             x: coords.x,
                             y: d.options.tms ? d._globalTileRange.max.y - coords.y : coords.y,
@@ -67,10 +67,7 @@ L.Control.Basemaps = L.Control.extend({
                     var tileBounds = d._tileCoordsToBounds(coords2);
                     var nw = crs.project(tileBounds.getNorthWest());
                     var se = crs.project(tileBounds.getSouthEast());
-                    var bbox = (wmsVersion >= 1.3 && crs === L.CRS.EPSG4326
-                        ? [se.y, nw.x, nw.y, se.x]
-                        : [nw.x, se.y, se.x, nw.y]
-                    ).join(",");
+                    var bbox = (wmsVersion >= 1.3 && crs === L.CRS.EPSG4326 ? [se.y, nw.x, nw.y, se.x] : [nw.x, se.y, se.x, nw.y]).join(",");
 
                     url +=
                         L.Util.getParamString(wmsParams, url, d.options.uppercase) +
@@ -80,10 +77,12 @@ L.Control.Basemaps = L.Control.extend({
             }
 
             var basemapNode = L.DomUtil.create("div", basemapClass, container);
+            //transformando a variavel imgNode em global
             var imgNode = L.DomUtil.create("img", null, basemapNode);
             imgNode.src = url;
             if (d.options && d.options.label) {
                 imgNode.title = d.options.label;
+                //alert(imgNode.title);
             }
 
             L.DomEvent.on(
@@ -114,6 +113,7 @@ L.Control.Basemaps = L.Control.extend({
                         L.DomUtil.addClass(container.getElementsByClassName("basemap")[altIdx], "alt");
 
                         L.DomUtil.addClass(container, "closed");
+
                     }
                 },
                 this

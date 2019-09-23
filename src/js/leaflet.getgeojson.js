@@ -1,4 +1,41 @@
+/* Criar a funcao que insere uma camada WMS e permite sua selecao, cria um geojson
+nesta selecao, e obtem as informacoes da camada, criando um popup nesta selecao */
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Codigo obtido em: https://codepen.io/mmsmdali/pen/LWEpym/
+url = "http://200.17.225.167:9888/geoserver/UCM-BASE/wms",
+    services = {
+        //layer1_name:{title:"layer1_title",properties:{property1_name:"property1_title",property2_name:"property2_title"}}
+        ccja_edificacao: {
+            title: "Edificação",
+            properties: {
+                setor: "Setor",
+                edificacao: "Edificação"
+            }
+        }
+        /*,
+                       ccja_calcada: {
+                           title: "Calçada",
+                           properties: {
+                               codLocal: "Código",
+                               area: "Área"
+                           }
+                       } */
+    };
+
+
+///////////////////////////////
+
+
+
+
+
+
 L.TileLayer.getgeojson = L.TileLayer.WMS.extend({
+
+
+
+
     onAdd: function(map) {
         var geojson;
 
