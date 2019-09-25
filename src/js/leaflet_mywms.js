@@ -1,6 +1,14 @@
 //wms
 var urlWms = 'http://200.17.225.167:9888/geoserver/UCM-BASE/wms?';
 
+/*
+var ortofoto5cm = L.tileLayer.wms(urlWms, {
+    layers: 'UCM-BASE:UFPR_CPJA_5cm',
+    format: 'image/png',
+    transparent: 'true',
+    maxZoom: 23,
+    minZoom: 20,
+}).addTo(map); */
 
 var edificacao = L.tileLayer.wms(urlWms, {
     layers: 'UCM-BASE:ccja_edificacao',
@@ -29,12 +37,3 @@ overlays = {
 
 };
 L.control.layers(basemap, overlays).addTo(map);
-
-
-var ortofoto5cm = L.tileLayer.wms(urlWms, {
-    layers: 'UCM-BASE:UFPR_CPJA_5cm',
-    format: 'image/png',
-    transparent: 'true',
-    maxZoom: 23,
-    minZoom: 20,
-}).addTo(map);
