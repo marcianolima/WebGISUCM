@@ -78,7 +78,7 @@ L.Control.Basemaps = L.Control.extend({
 
             var basemapNode = L.DomUtil.create("div", basemapClass, container);
             //transformando a variavel imgNode em global
-            var imgNode = L.DomUtil.create("img", null, basemapNode);
+            imgNode = L.DomUtil.create("img", null, basemapNode);
             imgNode.src = url;
             if (d.options && d.options.label) {
                 imgNode.title = d.options.label;
