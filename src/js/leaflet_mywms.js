@@ -10,7 +10,7 @@ var ortofoto5cm = L.tileLayer.wms(urlWms, {
     minZoom: 20,
 }).addTo(map); */
 
-var edificacao = L.tileLayer.wms(urlWms, {
+var edificacao = L.tileLayer.getGeojson(urlWms, {
     layers: 'UCM-BASE:ccja_edificacao',
     transparent: 'true',
     format: 'image/png8',
