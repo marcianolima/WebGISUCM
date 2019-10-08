@@ -1,28 +1,24 @@
 /* Criar a funcao que insere uma camada WMS e permita sua selecao, cria um geojson
 nesta selecao, e obtem as informacoes da camada, criando um popup nesta selecao */
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Codigo obtido em: https://codepen.io/mmsmdali/pen/LWEpym/
+
 
 L.TileLayer.GetGeojson = L.TileLayer.WMS.extend({
 
     onAdd: function(map) {
         // Triggered when the layer is added to a map.
-        // Register a click listener, then do all the upstream WMS things
-        L.TileLayer.WMS.prototype.onAdd.call(this, map);
+        //   Register a click listener, then do all the upstream WMS things
         var geojson;
         map.on("popupclose", function(e) {
             if (geojson) {
                 map.removeLayer(geojson);
             }
         });
-        /*
-        map.off('click', function(e) {
-            if (geojson) {
-                map.removeLayer(geojson);
-                //console.log("olá");
-            }
-        });
-        */
+        L.TileLayer.WMS.prototype.onAdd.call(this, map);
+        //map.on('click', this.getFeatureInfo, this);
 
         //////// Criando o Geojson de selecao e o popup
 
@@ -39,7 +35,7 @@ L.TileLayer.GetGeojson = L.TileLayer.WMS.extend({
                     layers.push(_layer.wmsParams.layers);
                     versions.push(_layer.wmsParams.version);
                     styles.push(_layer.wmsParams.styles);
-                    propertiesName.push(_layer.wmsParams.campos); // campos declarado na criacao da variavel wms
+                    propertiesName.push(_layer.wmsParams.campos);
                 }
             }
 
@@ -76,8 +72,9 @@ L.TileLayer.GetGeojson = L.TileLayer.WMS.extend({
                 obj.y = xy.y;
             }
 
+
             $.ajax({
-                // urlWms obtida de variavel global
+                // urlWms definifa em leaflet_mymap.js
                 url: urlWms + L.Util.getParamString(obj, urlWms, true),
                 // dataType: 'jsonp', // use only with JSONP enabled servers
                 // jsonpCallback: 'parseResponse', // parseResponse (default), use only with JSONP enabled servers, change only when you changed the callback name in request using format_options: 'callback: parseResponse'
@@ -97,12 +94,17 @@ L.TileLayer.GetGeojson = L.TileLayer.WMS.extend({
                             geojson = L.Proj.geoJson(data).addTo(map); // works with both EPSG4326, EPSG3857
                             map.fitBounds(geojson.getBounds());
 
+
+
                             for (var i in features) {
+
                                 var feature = features[i];
+
+
                                 var properties = feature.properties;
 
                                 //html += '<br/><table><caption>' + feature.id + '</caption>';
-                                html += '<thead><tr><th>Property</th><th>Value: </th></tr></thead><tbody>';
+                                html += '<thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>';
                                 /*
                                 for (var x in properties) {
                                     if (x != 'bbox') {
@@ -130,18 +132,26 @@ L.TileLayer.GetGeojson = L.TileLayer.WMS.extend({
                                 */
 
                                 html += propertiesName.toString();
+
                                 map.openPopup(html, loc, {
                                     maxHeight: 500
                                 });
+
+
+
+
                             }
                         } else {
                             html += "No Features Found.";
                             //alert(JSON.stringify(html, null, 4));
+
                         }
                     } else {
                         html += "Failed to Read the Feature(s).";
                         //alert(JSON.stringify(html, null, 4));
                     }
+
+
                 },
                 error: function(xhr, status, err) {
                     if (geojson) {
@@ -149,28 +159,91 @@ L.TileLayer.GetGeojson = L.TileLayer.WMS.extend({
                     }
                     html += "Unable to Complete the Request.: " + err;
                     map.openPopup(html, loc);
-
                 }
-
-            })
-        })
+            });
+        });
+        ///////
     },
-
 
     onRemove: function(map) {
         // Triggered when the layer is removed from a map.
         //   Unregister a click listener, then do all the upstream WMS things
+
         L.TileLayer.WMS.prototype.onRemove.call(this, map);
-        map.off('click', this.removeGeojson, this);
-
-        function removeGeojson() {
+        map.off('click', this.getFeatureInfo, this);
+        map.off('click', function(e) {
             if (geojson) {
-                this.removeLayer(geojson);
+                map.removeLayer(geojson);
             }
-        }
+        });
+    },
 
+    getFeatureInfo: function(evt) {
+        // Make an AJAX request to the server and hope for the best
+        var url = this.getFeatureInfoUrl(evt.latlng),
+            showResults = L.Util.bind(this.showGetFeatureInfo, this);
+        $.ajax({
+            url: url,
+            success: function(data, status, xhr) {
+                var err = typeof data === 'string' ? null : data;
+                /*
+                showResults(err, evt.latlng, data);
+            },*/
+                // Fix for blank popup window
+                var doc = (new DOMParser()).parseFromString(data, "text/html");
+                if (doc.body.innerHTML.trim().length > 0)
+                    showResults(err, evt.latlng, data);
+
+            },
+            error: function(xhr, status, error) {
+                showResults(error);
+            }
+        });
+    },
+
+    getFeatureInfoUrl: function(latlng) {
+        // Construct a GetFeatureInfo request URL given a point
+        var point = this._map.latLngToContainerPoint(latlng, this._map.getZoom()),
+            size = this._map.getSize(),
+
+            params = {
+                request: 'GetFeatureInfo',
+                service: 'WMS',
+                srs: 'EPSG:4326',
+                styles: this.wmsParams.styles,
+                transparent: this.wmsParams.transparent,
+                version: this.wmsParams.version,
+                format: this.wmsParams.format,
+                bbox: this._map.getBounds().toBBoxString(),
+                height: size.y,
+                width: size.x,
+                layers: this.wmsParams.layers,
+                query_layers: this.wmsParams.layers,
+                info_format: 'text/html'
+            };
+
+        params[params.version === '1.3.0' ? 'i' : 'x'] = point.x;
+        params[params.version === '1.3.0' ? 'j' : 'y'] = point.y;
+
+        return this._url + L.Util.getParamString(params, this._url, true);
+    },
+
+    showGetFeatureInfo: function(err, latlng, content) {
+        if (err) { console.log(err); return; } // do nothing if there's an error
+
+
+
+
+        // Otherwise show the content in a popup, or something.
+        /*
+        L.popup({ maxWidth: 800 })
+            .setLatLng(latlng)
+            .setContent(content)
+            .openOn(this._map);
+        */
     }
 });
+
 L.tileLayer.getGeojson = function(url, options) {
     return new L.TileLayer.GetGeojson(url, options);
 };

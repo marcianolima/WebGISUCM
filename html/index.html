@@ -105,6 +105,29 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
         }
+        /*  pop-up do geojson */
+        
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        caption {
+            background-color: #aeaeae;
+        }
+        
+        th {
+            border: 1px solid #dddddd;
+        }
+        
+        td {
+            border: 1px solid #dddddd;
+        }
+        
+        tr:nth-child(odd) {
+            background-color: #dddddd;
+        }
         
         @media (min-width: 768px) {
             #sidebar-wrapper {
@@ -237,6 +260,8 @@
     <script src='../src/plugins/leaflet-hash.js'></script>
     <!-- Controle de Basemaps de forma grafica-->
     <script src="../src/plugins/L.Control.Basemaps.js"></script>
+    <!-- BetterWms -->
+    <script src='../src/plugins/leaflet.betterwms.js'></script>
     <!-- Criação do popup e feição geojson dinâmica -->
     <script src='../src/js/leaflet.getgeojson.js'></script>
 
