@@ -23,11 +23,14 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
             success: function(data, status, xhr) {
                 var err = typeof data === 'string' ? null : data;
                 showResults(err, evt.latlng, data);
+
             },
             error: function(xhr, status, error) {
                 showResults(error);
+
             }
         });
+
     },
 
     getFeatureInfoUrl: function(latlng) {
@@ -48,7 +51,8 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
                 width: size.x,
                 layers: this.wmsParams.layers,
                 query_layers: this.wmsParams.layers,
-                info_format: 'text/html'
+                info_format: 'text/html',
+                propertyName: this.wmsParams.propertyName
             };
 
         params[params.version === '1.3.0' ? 'i' : 'x'] = point.x;
