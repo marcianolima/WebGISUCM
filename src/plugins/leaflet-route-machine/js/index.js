@@ -1,8 +1,8 @@
 var controlRoute = L.Routing.control(L.extend(window.lrmConfig, {
 
     waypoints: [
-        L.latLng(-25.4502, -49.2341),
-        L.latLng(-25.4507, -49.2341)
+        //L.latLng(-25.4502, -49.2341),
+        //L.latLng(-25.4507, -49.2341)
     ],
 
     geocoder: L.Control.Geocoder.nominatim(),
@@ -10,6 +10,7 @@ var controlRoute = L.Routing.control(L.extend(window.lrmConfig, {
     reverseWaypoints: true,
     showAlternatives: true,
     language: 'pt-BR',
+    router: L.Routing.mapbox('pk.eyJ1IjoibWFyY2lhbm9kYWNvc3RhbGltYSIsImEiOiJjamV5eGsxZ3IwNGFrMndxb216dWwwenB1In0.maLUDU8v7Xi5PAOkjzPwMg', { language: 'pt-BR' }),
 
 
     altLineOptions: {
@@ -48,21 +49,21 @@ L.Routing.errorControl(controlRoute).addTo(map);
         L.DomUtil.addClass(el, 'selected');
         selection = el;
     }
+    /*
+        for (var name in geocoders) {
+            btn = L.DomUtil.create('button', '', selector);
+            btn.innerHTML = name;
+            (function(n) {
+                L.DomEvent.addListener(btn, 'click', function() {
+                    select(geocoders[n], this);
+                }, btn);
+            })(name);
 
-    for (var name in geocoders) {
-        btn = L.DomUtil.create('button', '', selector);
-        btn.innerHTML = name;
-        (function(n) {
-            L.DomEvent.addListener(btn, 'click', function() {
-                select(geocoders[n], this);
-            }, btn);
-        })(name);
-
-        if (!selection) {
-            select(geocoders[name], btn);
+            if (!selection) {
+                select(geocoders[name], btn);
+            }
         }
-    }
-
+    */
     control.addTo(map);
     /*
         map.on('click', function(e) {
